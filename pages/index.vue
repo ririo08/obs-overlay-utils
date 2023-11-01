@@ -4,7 +4,7 @@ const channelId = ref<string>("")
 const createdUrl = ref<string>("")
 const onClickGenerateURL = () => {
   const params = ["key=" + key.value, "channelId=" + channelId.value]
-  createdUrl.value = `${location.origin}/senden?${params.join("&")}`
+  createdUrl.value = `${location.origin}/senden/?${params.join("&")}`
 }
 </script>
 
