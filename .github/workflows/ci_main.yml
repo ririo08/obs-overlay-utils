@@ -1,8 +1,8 @@
-name: generate_main
+name: deploy
 
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
 
 jobs:
   generate_main:
@@ -15,7 +15,7 @@ jobs:
       - name: Setup node env 🏗
         uses: actions/setup-node@v3
         with:
-          node-version: 'latest'
+          node-version: "latest"
 
       - name: Setup Bun ☁️
         uses: oven-sh/setup-bun@v1
