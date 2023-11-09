@@ -1,8 +1,10 @@
 {
   "name": "please-subscribe",
+  "version": "v0.1",
   "private": true,
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
