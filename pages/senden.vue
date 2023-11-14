@@ -84,7 +84,7 @@ useIntervalFn(() => {
       }"
     >
       現在の登録者数：{{ nowSubscriberCount }}人
-      <img src="/img/ririo.png" width="48" />
+      <img v-if="animationSeq === 2" src="/img/ririo.png" width="48" />
     </h1>
   </div>
 </template>
@@ -120,6 +120,7 @@ img {
   margin-left: 10px;
   filter: drop-shadow(2px 2px 0 white) drop-shadow(-2px -2px 0 white)
     drop-shadow(2px -2px 0 white) drop-shadow(-2px 2px 0 white);
+  animation: rotateY 2s ease-in-out;
 }
 
 .show {
@@ -154,6 +155,16 @@ img {
   100% {
     transform: translate(0) scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes rotateY {
+  0%,
+  50% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
   }
 }
 </style>
