@@ -15,8 +15,8 @@ devDependencies:
     specifier: ^10.7.0
     version: 10.7.0(nuxt@3.8.2)(vue@3.3.10)
   '@vueuse/router':
-    specifier: ^10.6.1
-    version: 10.6.1(vue-router@4.2.5)(vue@3.3.10)
+    specifier: ^10.7.0
+    version: 10.7.0(vue-router@4.2.5)(vue@3.3.10)
   nuxt:
     specifier: ^3.8.2
     version: 3.8.2(sass@1.69.5)(vite@4.5.1)
@@ -2008,12 +2008,12 @@ packages:
       - vue
     dev: true
 
-  /@vueuse/router@10.6.1(vue-router@4.2.5)(vue@3.3.10):
-    resolution: {integrity: sha512-9EMf30SownmxYKC3h36tl8uALSBGFkz3Dc2n+lQgJuyOYPIO/VotzDdkBxuEoHYKaCWw2JQa/S1q+t8NR26PvQ==}
+  /@vueuse/router@10.7.0(vue-router@4.2.5)(vue@3.3.10):
+    resolution: {integrity: sha512-8NQ12V3dtiIEKyd32RzzXLOqU+NC5/9cf7kv5cGOQzJB+Ne8j+1VmRz4ciOhOyHuiBJSfjwSqKDTzvsczZUBlQ==}
     peerDependencies:
       vue-router: '>=4.0.0-rc.1'
     dependencies:
-      '@vueuse/shared': 10.6.1(vue@3.3.10)
+      '@vueuse/shared': 10.7.0(vue@3.3.10)
       vue-demi: 0.14.6(vue@3.3.10)
       vue-router: 4.2.5(vue@3.3.10)
     transitivePeerDependencies:
