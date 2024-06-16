@@ -1,170 +1,60 @@
 <script lang="ts" setup>
-import { useRouteQuery } from "@vueuse/router"
+import { useRouteQuery } from '@vueuse/router'
+
 useHead({
   link: [
-    { rel: "preconnect", href: "https://fonts.googleapis.com" },
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     {
-      rel: "preconnect",
-      href: "https://fonts.gstatic.com",
-      crossorigin: "anonymous",
+      rel: 'preconnect',
+      href: 'https://fonts.gstatic.com',
+      crossorigin: 'anonymous',
     },
     {
-      rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap",
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap',
     },
   ],
 })
 
-const firstTime = 10
-const secondTime = 10
-const loopTime = 15 * 60
+const { decodeBase64 } = useCustomParams()
 
 const nowSubscriberCount = ref<number>(0)
-const animationSeq = ref<number>(0)
-const subscribeText = "チャンネル登録よろしくお願いします！"
-const computedSubscribeTextArray = computed(() => {
-  return subscribeText.split("")
+
+const params = computed(() => {
+  const query = useRouteQuery<string>('value')
+  console.log(query.value)
+  return decodeBase64(query.value)
 })
 
-const keyQuery = useRouteQuery<string>("key")
-const channelIdQuery = useRouteQuery<string>("channelId")
-
-const getYouTubeSubscriber = async (key: string, channelId: string) => {
-  const res = await useFetch(
-    `https://www.googleapis.com/youtube/v3/channels?id=${channelId}&key=${key}&part=statistics`
+/** YouTubeチャンネル登録者数取得 */
+const getYouTubeSubscriber = async (key: string, channelId: string): Promise<number> => {
+  const res = await useFetch<gapi.client.youtube.ChannelListResponse>(
+    `https://www.googleapis.com/youtube/v3/channels?id=${channelId}&key=${key}&part=statistics`,
   )
-  return (res.data.value as any).items[0].statistics.subscriberCount as number
+  if (res.data.value?.items) {
+    if (res.data.value!.items![0].statistics?.subscriberCount) {
+      const parsed = parseInt(res.data.value!.items![0].statistics?.subscriberCount)
+      return isNaN(parsed) ? 0 : parsed
+    }
+  }
+  return 0
 }
 
-const displaySubscribeAnimation = async () => {
+const updateSubscriberCount = async () => {
   nowSubscriberCount.value = await getYouTubeSubscriber(
-    keyQuery.value,
-    channelIdQuery.value
+    params.value.key,
+    params.value.channelId,
   )
-  animationSeq.value = 1
-  await useSleep(firstTime)
-  animationSeq.value = 0
-  await useSleep(0.5)
-  animationSeq.value = 2
-  await useSleep(secondTime)
-  animationSeq.value = 0
 }
-
-onMounted(() => {
-  displaySubscribeAnimation()
-})
-
-useIntervalFn(() => {
-  displaySubscribeAnimation()
-}, loopTime * 1000)
 </script>
 
 <template>
-  <div class="container">
-    <h1
-      id="h101"
-      class="animate"
-      :class="{
-        show: animationSeq === 1,
-      }"
-    >
-      <span
-        v-for="(text, index) in computedSubscribeTextArray"
-        :style="{
-          'animation-delay': index * 0.05 + 's',
-        }"
-      >
-        {{ text }}
-      </span>
-    </h1>
-    <h1
-      id="h102"
-      :class="{
-        show: animationSeq === 2,
-      }"
-    >
-      現在の登録者数：{{ nowSubscriberCount }}人
-      <img v-if="animationSeq === 2" src="/img/ririo.png" width="48" />
-    </h1>
-  </div>
+  <section>
+    <SendenDisplay
+      :count="nowSubscriberCount"
+      @update="updateSubscriberCount"
+    />
+  </section>
 </template>
 
-<style lang="scss">
-h1 {
-  margin: 0;
-  margin-top: 20px;
-  font-size: 48px;
-  padding-left: 20px;
-  position: absolute;
-  font-family: "RocknRoll One", sans-serif;
-  color: white;
-  opacity: 0;
-  transition: all 0.5s;
-  text-shadow: rgb(0, 0, 0) 3px 0px 0px, rgb(0, 0, 0) 2.83487px 0.981584px 0px,
-    rgb(0, 0, 0) 2.35766px 1.85511px 0px, rgb(0, 0, 0) 1.62091px 2.52441px 0px,
-    rgb(0, 0, 0) 0.705713px 2.91581px 0px,
-    rgb(0, 0, 0) -0.287171px 2.98622px 0px,
-    rgb(0, 0, 0) -1.24844px 2.72789px 0px, rgb(0, 0, 0) -2.07227px 2.16926px 0px,
-    rgb(0, 0, 0) -2.66798px 1.37182px 0px, rgb(0, 0, 0) -2.96998px 0.42336px 0px,
-    rgb(0, 0, 0) -2.94502px -0.571704px 0px,
-    rgb(0, 0, 0) -2.59586px -1.50383px 0px,
-    rgb(0, 0, 0) -1.96093px -2.27041px 0px,
-    rgb(0, 0, 0) -1.11013px -2.78704px 0px,
-    rgb(0, 0, 0) -0.137119px -2.99686px 0px,
-    rgb(0, 0, 0) 0.850987px -2.87677px 0px,
-    rgb(0, 0, 0) 1.74541px -2.43999px 0px, rgb(0, 0, 0) 2.44769px -1.73459px 0px,
-    rgb(0, 0, 0) 2.88051px -0.838247px 0px !important;
-}
-
-img {
-  margin-left: 10px;
-  filter: drop-shadow(2px 2px 0 white) drop-shadow(-2px -2px 0 white)
-    drop-shadow(2px -2px 0 white) drop-shadow(-2px 2px 0 white);
-  animation: rotateY 2s ease-in-out;
-}
-
-.show {
-  opacity: 1;
-  & span {
-    opacity: 0;
-    transform: translate(-150px, 0) scale(0.3);
-    animation: leftRight 0.5s forwards;
-  }
-}
-
-.animate span {
-  display: inline-block;
-}
-
-@keyframes leftRight {
-  40% {
-    transform: translate(50px, 0) scale(0.7);
-    opacity: 1;
-    color: #ff9600;
-  }
-
-  60% {
-    color: #83400a;
-  }
-
-  80% {
-    transform: translate(0) scale(2);
-    opacity: 0.5;
-  }
-
-  100% {
-    transform: translate(0) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes rotateY {
-  0%,
-  50% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(360deg);
-  }
-}
-</style>
+<style></style>
