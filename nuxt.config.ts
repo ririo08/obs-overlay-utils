@@ -7,5 +7,11 @@ export default defineNuxtConfig({
     baseURL: "/please-subscribe/",
   },
 
-  modules: ["@vueuse/nuxt"],
+  modules: ["@vueuse/nuxt", '@nuxt/eslint'],
+
+  eslint: {
+    config: {
+      stylistic: true,
+    },
+  },
 })

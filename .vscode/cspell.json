@@ -1,0 +1,11 @@
+{
+  "ignorePaths": [
+    "package.json"
+  ],
+  "words": [
+    "nuxt",
+    "ririo",
+    "Rockn",
+    "vueuse"
+  ]
+}
