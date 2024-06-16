@@ -4,10 +4,10 @@ export default defineNuxtConfig({
   ssr: false,
 
   app: {
-    baseURL: "/please-subscribe/",
+    baseURL: '/please-subscribe/',
   },
 
-  modules: ["@vueuse/nuxt", '@nuxt/eslint'],
+  modules: ['@vueuse/nuxt', '@nuxt/eslint'],
 
   eslint: {
     config: {
