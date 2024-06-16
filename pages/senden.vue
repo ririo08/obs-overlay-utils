@@ -16,6 +16,9 @@ useHead({
   ],
 })
 
+const colorMode = useColorMode()
+colorMode.value = 'light'
+
 const { decodeBase64 } = useCustomParams()
 
 const nowSubscriberCount = ref<number>(0)

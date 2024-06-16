@@ -13,10 +13,6 @@ export default defineNuxtConfig({
     '@nuxt/ui',
   ],
 
-  colorMode: {
-    preference: 'light',
-  },
-
   eslint: {
     config: {
       stylistic: true,

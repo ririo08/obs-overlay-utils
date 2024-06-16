@@ -9,41 +9,51 @@ const onClickGenerateURL = () => {
     key: key.value,
     channelId: channelId.value,
   })
-  createdUrl.value = `${location.origin}/please-subscribe/senden/?value=${params}`
+  createdUrl.value = `/senden?value=${params}`
 }
 </script>
 
 <template>
-  <section>
+  <section class="max-w-xl m-auto">
     <p>作成中…</p>
-    <div>
-      <label>
-        <span>key: </span>
-        <input
-          v-model="key"
-          type="text"
-        >
-      </label>
-    </div>
-    <div>
-      <label>
-        <span>channelId: </span>
-        <input
-          v-model="channelId"
-          type="text"
-        >
-      </label>
-    </div>
-    <p>
-      <button @click="onClickGenerateURL">
+    <UFormGroup
+      class="mt-2"
+      label="Google API Key"
+    >
+      <UInput
+        v-model="key"
+        type="text"
+      />
+    </UFormGroup>
+
+    <UFormGroup
+      class="mt-2"
+      label="Channel ID"
+    >
+      <UInput
+        v-model="channelId"
+        type="text"
+      />
+    </UFormGroup>
+
+    <UFormGroup
+      class="mt-2"
+    >
+      <UButton @click="onClickGenerateURL">
         URL作成
-      </button>
-    </p>
-    <p>
-      <nuxt-link :to="createdUrl">
+      </UButton>
+    </UFormGroup>
+
+    <UFormGroup
+      class="mt-2"
+    >
+      <ULink
+        :to="createdUrl"
+        class="text-primary"
+      >
         リンク
-      </nuxt-link>
-    </p>
+      </ULink>
+    </UFormGroup>
   </section>
 </template>
 
