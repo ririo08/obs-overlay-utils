@@ -18,4 +18,6 @@ export default defineNuxtConfig({
       stylistic: true,
     },
   },
+
+  compatibilityDate: '2024-12-25',
 })

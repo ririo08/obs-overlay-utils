@@ -4,12 +4,20 @@ const key = ref<string>('')
 const channelId = ref<string>('')
 const createdUrl = ref<string>('')
 
-const onClickGenerateURL = () => {
+const onClickGenerateScheduledURL = () => {
   const params = encodeBase64({
     key: key.value,
     channelId: channelId.value,
   })
   createdUrl.value = `/senden?value=${params}`
+}
+
+const onClickGenerateAlwaysURL = () => {
+  const params = encodeBase64({
+    key: key.value,
+    channelId: channelId.value,
+  })
+  createdUrl.value = `/counter?value=${params}`
 }
 </script>
 
@@ -39,8 +47,14 @@ const onClickGenerateURL = () => {
     <UFormGroup
       class="mt-2"
     >
-      <UButton @click="onClickGenerateURL">
-        URL作成
+      <UButton @click="onClickGenerateScheduledURL">
+        定期宣伝URL作成
+      </UButton>
+      <UButton
+        class="ml-2"
+        @click="onClickGenerateAlwaysURL"
+      >
+        常時表示URL作成
       </UButton>
     </UFormGroup>
 

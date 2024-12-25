@@ -11,7 +11,7 @@ useHead({
     },
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap',
+      href: 'https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Dela+Gothic+One&display=swap',
     },
   ],
 })
@@ -35,11 +35,14 @@ const updateSubscriberCount = async () => {
     params.value.channelId,
   )
 }
+
+useIntervalFn(updateSubscriberCount, 60000)
+onMounted(() => updateSubscriberCount())
 </script>
 
 <template>
   <section>
-    <SendenDisplay
+    <SubCounter
       :count="nowSubscriberCount"
       @update="updateSubscriberCount"
     />
