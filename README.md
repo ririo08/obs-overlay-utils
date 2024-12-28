@@ -1,35 +1,33 @@
 <p align="center">
-  <a href="https://github.com/ririo08/please-subscribe" target="_blank" rel="noopener noreferrer">
+  <a href="https://github.com/ririo08/obs-overlay-utils" target="_blank" rel="noopener noreferrer">
     <img width="160" height="160" src="./public/img/logo.png" alt="Please Subscribe logo">
   </a>
 </p>
 
-<h1 align="center">Please Subscribe Overlay</h1>
+<h1 align="center">OBS Overlay Utils</h1>
 
 <p align="center">
-チャンネル登録を促す配信向け表示オーバーレイ
+OBS向けオーバーレイの寄せ集め
 </p>
 
 <p align="center">
-  <img alt="GitHub release (with filter)" src="https://img.shields.io/github/v/release/ririo08/please-subscribe">
-  <a href="https://github.com/ririo08/please-subscribe/actions/workflows/ci_main.yml">
-    <img src="https://github.com/ririo08/please-subscribe/actions/workflows/ci_main.yml/badge.svg" alt="generate_main">
+  <img alt="GitHub release (with filter)" src="https://img.shields.io/github/v/release/ririo08/obs-overlay-utils">
+  <a href="https://github.com/ririo08/obs-overlay-utils/actions/workflows/ci_main.yml">
+    <img src="https://github.com/ririo08/obs-overlay-utils/actions/workflows/ci_main.yml/badge.svg" alt="generate_main">
   </a>
 </p>
 
 <br />
 
 <p align="center">
-  <a href="https://github.com/ririo08/please-subscribe" target="_blank" rel="noopener noreferrer" >
+  <a href="https://github.com/ririo08/obs-overlay-utils" target="_blank" rel="noopener noreferrer" >
     <img src="./public/img/screenshot.gif" alt="screenshots" width="600" height="auto">
   </a>
 </p>
 
 ## これは何？
 
-定期的にチャンネル登録を促す宣伝文章を表示することができるオーバーレイです。  
-現在は 10 分に一度、10 秒間チャンネル登録を促す文章を表示後、現在のチャンネル登録者数を表示することができるようになっています。  
-チャンネル登録をしてほしい旨を一々伝えるのが面倒だったので作成してみました。
+準備中！
 
 ## 使い方
 
@@ -46,8 +44,8 @@
 基本的には MIT ライセンスとしていますが、可能であれば以下の文章を説明欄に貼っていただけるととても喜びます。
 
 ```
-チャンネル登録喚起オーバーレイ
-https://ririo.dev/please-subscribe/
+OBSオーバーレイユーティリティ
+https://ririo.dev/obs-overlay-utils/
 ```
 
 ## コントリビュート
@@ -76,6 +74,6 @@ bun generate
 
 ## コントリビューﾀ
 
-<a href="https://github.com/ririo08/please-subscribe/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ririo08/please-subscribe" />
+<a href="https://github.com/ririo08/obs-overlay-utils/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ririo08/obs-overlay-utils" />
 </a>
