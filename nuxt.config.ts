@@ -11,6 +11,9 @@ export default defineNuxtConfig({
 
   app: {
     baseURL: '/obs-overlay-utils/',
+    head: {
+      title: 'OBS Overlay ユーティリティ',
+    },
   },
 
   compatibilityDate: '2024-12-25',

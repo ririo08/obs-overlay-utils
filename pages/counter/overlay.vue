@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { useRouteQuery } from '@vueuse/router'
 
+definePageMeta({ layout: 'overlay' })
+
 useHead({
   link: [
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -11,13 +13,10 @@ useHead({
     },
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap',
+      href: 'https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Dela+Gothic+One&display=swap',
     },
   ],
 })
-
-const colorMode = useColorMode()
-colorMode.value = 'light'
 
 const { decodeBase64 } = useCustomParams()
 
@@ -35,11 +34,14 @@ const updateSubscriberCount = async () => {
     params.value.channelId,
   )
 }
+
+useIntervalFn(updateSubscriberCount, 60000)
+onMounted(() => updateSubscriberCount())
 </script>
 
 <template>
   <section>
-    <SendenDisplay
+    <SubCounter
       :count="nowSubscriberCount"
       @update="updateSubscriberCount"
     />
