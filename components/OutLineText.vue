@@ -1,35 +1,37 @@
+<template>
+  <span
+    v-bind="$attrs"
+    :style="computedStyle"
+  >
+    {{ label }}
+  </span>
+</template>
+
 <script setup lang="ts">
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   label: string
-  stroke?: 6 | 12 | 16 | 20
+  stroke?: number
   color?: string
 }>(), {
   stroke: 6,
   color: 'black',
 })
+
+const computedStyle = computed(() => {
+  const shadows: string[] = []
+  const step = 1 / props.stroke
+
+  for (let angle = 0; angle < 2 * Math.PI; angle += step) {
+    const x = Math.cos(angle) * props.stroke
+    const y = Math.sin(angle) * props.stroke
+    shadows.push(`${x}px ${y}px ${props.color}`)
+  }
+
+  return {
+    textShadow: shadows.join(', '),
+  }
+})
 </script>
 
-<template>
-  <span
-    v-bind="$attrs"
-    :class="`text-shadow-${stroke}`"
-  >{{ label }}</span>
-</template>
-
-<style scoped lang="scss">
-$color: v-bind(color);
-.text-shadow {
-  &-6 {
-    text-shadow: $color 6px 0px 0px, $color 5.91686px 0.995377px 0px, $color 5.66974px 1.96317px 0px, $color 5.2655px 2.87655px 0px, $color 4.71532px 3.71022px 0px, $color 4.03447px 4.44106px 0px, $color 3.24181px 5.04883px 0px, $color 2.35931px 5.51667px 0px, $color 1.41143px 5.83163px 0px, $color 0.424423px 5.98497px 0px, $color -0.574341px 5.97245px 0px, $color -1.55719px 5.79441px 0px, $color -2.49688px 5.45578px 0px, $color -3.36738px 4.96596px 0px, $color -4.14455px 4.33852px 0px, $color -4.80686px 3.59083px 0px, $color -5.33596px 2.74364px 0px, $color -5.71718px 1.8204px 0px, $color -5.93995px 0.84672px 0px, $color -5.99811px -0.150428px 0px, $color -5.89004px -1.14341px 0px, $color -5.61874px -2.1047px 0px, $color -5.19172px -3.00766px 0px, $color -4.62082px -3.82727px 0px, $color -3.92186px -4.54081px 0px, $color -3.11421px -5.12852px 0px, $color -2.22026px -5.57409px 0px, $color -1.26477px -5.86518px 0px, $color -0.274238px -5.99373px 0px, $color 0.723898px -5.95617px 0px, $color 1.70197px -5.75355px 0px, $color 2.63288px -5.39147px 0px, $color 3.49082px -4.87998px 0px, $color 4.25202px -4.23324px 0px, $color 4.89538px -3.46919px 0px, $color 5.40307px -2.60899px 0px, $color 5.76102px -1.67649px 0px, $color 5.95932px -0.697531px 0px;
-  }
-  &-12{
-    text-shadow: $color 12px 0px 0px, $color 11.9584px 0.998843px 0px, $color 11.8337px 1.99075px 0px, $color 11.6269px 2.96885px 0px, $color 11.3395px 3.92634px 0px, $color 10.9733px 4.85657px 0px, $color 10.531px 5.75311px 0px, $color 10.0156px 6.60971px 0px, $color 9.43065px 7.42044px 0px, $color 8.78027px 8.17967px 0px, $color 8.06895px 8.88212px 0px, $color 7.30163px 9.52293px 0px, $color 6.48363px 10.0977px 0px, $color 5.62063px 10.6023px 0px, $color 4.71862px 11.0333px 0px, $color 3.78387px 11.3878px 0px, $color 2.82285px 11.6633px 0px, $color 1.84224px 11.8577px 0px, $color 0.848846px 11.9699px 0px, $color -0.15044px 11.9991px 0px, $color -1.14868px 11.9449px 0px, $color -2.13895px 11.8078px 0px, $color -3.11438px 11.5888px 0px, $color -4.06819px 11.2894px 0px, $color -4.99376px 10.9116px 0px, $color -5.88468px 10.458px 0px, $color -6.73475px 9.93192px 0px, $color -7.53808px 9.33688px 0px, $color -8.2891px 8.67703px 0px, $color -8.98258px 7.95696px 0px, $color -9.61372px 7.18167px 0px, $color -10.1781px 6.35653px 0px, $color -10.6719px 5.48727px 0px, $color -11.0916px 4.57993px 0px, $color -11.4344px 3.64081px 0px, $color -11.6977px 2.67641px 0px, $color -11.8799px 1.69344px 0px, $color -11.9796px 0.698716px 0px, $color -11.9962px -0.300857px 0px, $color -11.9296px -1.29834px 0px, $color -11.7801px -2.28682px 0px, $color -11.5489px -3.25942px 0px, $color -11.2375px -4.2094px 0px, $color -10.8481px -5.13016px 0px, $color -10.3834px -6.01532px 0px, $color -9.84671px -6.85874px 0px, $color -9.24164px -7.65454px 0px, $color -8.57243px -8.39723px 0px, $color -7.84372px -9.08163px 0px, $color -7.06058px -9.703px 0px, $color -6.22843px -10.257px 0px, $color -5.35305px -10.7399px 0px, $color -4.44052px -11.1482px 0px, $color -3.49717px -11.4791px 0px, $color -2.52955px -11.7304px 0px, $color -1.54437px -11.9002px 0px, $color -0.548477px -11.9875px 0px, $color 0.451226px -11.9915px 0px, $color 1.4478px -11.9123px 0px, $color 2.43432px -11.7505px 0px, $color 3.40395px -11.5071px 0px, $color 4.34995px -11.1838px 0px, $color 5.26576px -10.7829px 0px, $color 6.14503px -10.3072px 0px, $color 6.98164px -9.75995px 0px, $color 7.7698px -9.14495px 0px, $color 8.50404px -8.46648px 0px, $color 9.17925px -7.72925px 0px, $color 9.79076px -6.93838px 0px, $color 10.3343px -6.09935px 0px, $color 10.8061px -5.21799px 0px, $color 11.203px -4.30041px 0px, $color 11.522px -3.35299px 0px, $color 11.7612px -2.38229px 0px, $color 11.9186px -1.39506px 0px, $color 11.9934px -0.398151px 0px;
-  }
-  &-16 {
-    text-shadow: $color 16px 0px 0px, $color 15.9688px 0.999349px 0px, $color 15.8752px 1.9948px 0px, $color 15.7196px 2.98245px 0px, $color 15.5026px 3.95846px 0px, $color 15.2251px 4.91902px 0px, $color 14.8881px 5.86036px 0px, $color 14.493px 6.77882px 0px, $color 14.0413px 7.67081px 0px, $color 13.5348px 8.53284px 0px, $color 12.9754px 9.36156px 0px, $color 12.3654px 10.1537px 0px, $color 11.707px 10.9062px 0px, $color 11.003px 11.6161px 0px, $color 10.2559px 12.2807px 0px, $color 9.46888px 12.8973px 0px, $color 8.64484px 13.4635px 0px, $color 7.78703px 13.9772px 0px, $color 6.89882px 14.4363px 0px, $color 5.98367px 14.839px 0px, $color 5.04516px 15.1838px 0px, $color 4.08694px 15.4692px 0px, $color 3.11276px 15.6943px 0px, $color 2.12643px 15.8581px 0px, $color 1.1318px 15.9599px 0px, $color 0.13274px 15.9994px 0px, $color -0.866834px 15.9765px 0px, $color -1.86302px 15.8912px 0px, $color -2.85194px 15.7438px 0px, $color -3.82971px 15.5349px 0px, $color -4.79254px 15.2654px 0px, $color -5.73664px 14.9362px 0px, $color -6.65835px 14.5488px 0px, $color -7.55405px 14.1045px 0px, $color -8.42026px 13.6051px 0px, $color -9.25359px 13.0526px 0px, $color -10.0508px 12.4492px 0px, $color -10.8087px 11.7971px 0px, $color -11.5245px 11.099px 0px, $color -12.1952px 10.3575px 0px, $color -12.8183px 9.57555px 0px, $color -13.3914px 8.75624px 0px, $color -13.9121px 7.90272px 0px, $color -14.3786px 7.01835px 0px, $color -14.7888px 6.10658px 0px, $color -15.1414px 5.17095px 0px, $color -15.4348px 4.21514px 0px, $color -15.6679px 3.24286px 0px, $color -15.8399px 2.25792px 0px, $color -15.95px 1.26416px 0px, $color -15.9978px 0.26547px 0px, $color -15.9831px -0.73426px 0px, $color -15.9061px -1.73112px 0px, $color -15.7669px -2.72122px 0px, $color -15.5661px -3.7007px 0px, $color -15.3046px -4.66573px 0px, $color -14.9833px -5.61253px 0px, $color -14.6035px -6.53742px 0px, $color -14.1667px -7.43678px 0px, $color -13.6745px -8.3071px 0px, $color -13.1289px -9.14498px 0px, $color -12.5321px -9.94715px 0px, $color -11.8864px -10.7105px 0px, $color -11.1942px -11.432px 0px, $color -10.4583px -12.1088px 0px, $color -9.68157px -12.7384px 0px, $color -8.86703px -13.3182px 0px, $color -8.01787px -13.8461px 0px, $color -7.1374px -14.3198px 0px, $color -6.22906px -14.7377px 0px, $color -5.29639px -15.098px 0px, $color -4.34304px -15.3993px 0px, $color -3.37273px -15.6405px 0px, $color -2.38925px -15.8206px 0px, $color -1.39644px -15.9389px 0px, $color -0.398183px -15.995px 0px, $color 0.601634px -15.9887px 0px, $color 1.5991px -15.9199px 0px, $color 2.59033px -15.7889px 0px, $color 3.57143px -15.5963px 0px, $color 4.53859px -15.3428px 0px, $color 5.48803px -15.0294px 0px, $color 6.41604px -14.6572px 0px, $color 7.31899px -14.2279px 0px, $color 8.19337px -13.743px 0px, $color 9.03575px -13.2044px 0px, $color 9.84284px -12.6142px 0px, $color 10.6115px -11.9748px 0px, $color 11.3387px -11.2886px 0px, $color 12.0217px -10.5584px 0px, $color 12.6577px -9.78692px 0px, $color 13.2442px -8.97722px 0px, $color 13.7791px -8.13247px 0px, $color 14.2601px -7.25595px 0px, $color 14.6855px -6.35111px 0px, $color 15.0535px -5.42146px 0px, $color 15.3627px -4.47065px 0px, $color 15.612px -3.50237px 0px, $color 15.8002px -2.52042px 0px, $color 15.9268px -1.52863px 0px, $color 15.9912px -0.530867px 0px;
-  }
-  &-20 {
-    text-shadow: $color 20px 0px 0px, $color 19.975px 0.999583px 0px, $color 19.9001px 1.99667px 0px, $color 19.7754px 2.98876px 0px, $color 19.6013px 3.97339px 0px, $color 19.3782px 4.94808px 0px, $color 19.1067px 5.9104px 0px, $color 18.7875px 6.85796px 0px, $color 18.4212px 7.78837px 0px, $color 18.0089px 8.69931px 0px, $color 17.5517px 9.58851px 0px, $color 17.0505px 10.4537px 0px, $color 16.5067px 11.2928px 0px, $color 15.9217px 12.1037px 0px, $color 15.2968px 12.8844px 0px, $color 14.6338px 13.6328px 0px, $color 13.9341px 14.3471px 0px, $color 13.1997px 15.0256px 0px, $color 12.4322px 15.6665px 0px, $color 11.6337px 16.2683px 0px, $color 10.806px 16.8294px 0px, $color 9.95142px 17.3485px 0px, $color 9.07192px 17.8241px 0px, $color 8.16975px 18.2553px 0px, $color 7.24715px 18.6408px 0px, $color 6.30645px 18.9797px 0px, $color 5.34998px 19.2712px 0px, $color 4.38013px 19.5145px 0px, $color 3.39934px 19.709px 0px, $color 2.41006px 19.8543px 0px, $color 1.41474px 19.9499px 0px, $color 0.415897px 19.9957px 0px, $color -0.58399px 19.9915px 0px, $color -1.58242px 19.9373px 0px, $color -2.57689px 19.8333px 0px, $color -3.56492px 19.6797px 0px, $color -4.54404px 19.477px 0px, $color -5.51181px 19.2255px 0px, $color -6.46579px 18.926px 0px, $color -7.40362px 18.5792px 0px, $color -8.32294px 18.1859px 0px, $color -9.22145px 17.7472px 0px, $color -10.0969px 17.2642px 0px, $color -10.9472px 16.738px 0px, $color -11.77px 16.1699px 0px, $color -12.5635px 15.5615px 0px, $color -13.3255px 14.9141px 0px, $color -14.0543px 14.2295px 0px, $color -14.7479px 13.5093px 0px, $color -15.4046px 12.7553px 0px, $color -16.0229px 11.9694px 0px, $color -16.6011px 11.1537px 0px, $color -17.1378px 10.31px 0px, $color -17.6316px 9.44061px 0px, $color -18.0814px 8.5476px 0px, $color -18.486px 7.63322px 0px, $color -18.8444px 6.69976px 0px, $color -19.1557px 5.74956px 0px, $color -19.4192px 4.78499px 0px, $color -19.634px 3.80845px 0px, $color -19.7999px 2.8224px 0px, $color -19.9162px 1.82929px 0px, $color -19.9827px 0.831613px 0px, $color -19.9993px -0.168145px 0px, $color -19.9659px -1.16748px 0px, $color -19.8826px -2.1639px 0px, $color -19.7496px -3.15491px 0px, $color -19.5672px -4.13804px 0px, $color -19.336px -5.11082px 0px, $color -19.0564px -6.07083px 0px, $color -18.7291px -7.01566px 0px, $color -18.3551px -7.94296px 0px, $color -17.9352px -8.85041px 0px, $color -17.4704px -9.73573px 0px, $color -16.962px -10.5967px 0px, $color -16.4112px -11.4312px 0px, $color -15.8194px -12.2372px 0px, $color -15.188px -13.0125px 0px, $color -14.5186px -13.7553px 0px, $color -13.813px -14.4638px 0px, $color -13.0729px -15.1361px 0px, $color -12.3px -15.7705px 0px, $color -11.4965px -16.3655px 0px, $color -10.6642px -16.9197px 0px, $color -9.80522px -17.4315px 0px, $color -8.92175px -17.8998px 0px, $color -8.01598px -18.3233px 0px, $color -7.09018px -18.7011px 0px, $color -6.14666px -19.032px 0px, $color -5.18777px -19.3155px 0px, $color -4.21592px -19.5506px 0px, $color -3.23352px -19.7369px 0px, $color -2.24305px -19.8738px 0px, $color -1.24697px -19.9611px 0px, $color -0.247773px -19.9985px 0px, $color 0.752043px -19.9859px 0px, $color 1.74998px -19.9233px 0px, $color 2.74354px -19.8109px 0px, $color 3.73025px -19.6491px 0px, $color 4.70763px -19.4381px 0px, $color 5.67324px -19.1785px 0px, $color 6.62468px -18.871px 0px, $color 7.55956px -18.5163px 0px, $color 8.47554px -18.1153px 0px, $color 9.37033px -17.6691px 0px, $color 10.2417px -17.1787px 0px, $color 11.0875px -16.6453px 0px, $color 11.9056px -16.0704px 0px, $color 12.6939px -15.4553px 0px, $color 13.4504px -14.8015px 0px, $color 14.1734px -14.1108px 0px, $color 14.8609px -13.3848px 0px, $color 15.5113px -12.6253px 0px, $color 16.1229px -11.8343px 0px, $color 16.6943px -11.0137px 0px, $color 17.2238px -10.1656px 0px, $color 17.7104px -9.29204px 0px, $color 18.1527px -8.39528px 0px, $color 18.5496px -7.47753px 0px, $color 18.9001px -6.5411px 0px, $color 19.2034px -5.58831px 0px, $color 19.4587px -4.62156px 0px, $color 19.6654px -3.64325px 0px, $color 19.8229px -2.65584px 0px, $color 19.9308px -1.66179px 0px, $color 19.989px -0.663584px 0px;
-  }
-}
+<style scoped>
 </style>
