@@ -4,7 +4,7 @@
   "dependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/eslint": "^0.7.6",
-    "@nuxt/ui": "^2.21.0",
+    "@nuxt/ui": "^3.0.0",
     "@types/gapi.client.youtube-v3": "^0.0.4",
     "@vueuse/core": "^12.5.0",
     "@vueuse/nuxt": "^12.5.0",
