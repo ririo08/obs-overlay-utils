@@ -1,1 +1,0 @@
-import{at as t,e as a,c as r,C as s,o as l}from"./BBnJqxJj.js";const n=()=>t("color-mode").value,m=a({__name:"overlay",setup(c){const e=n();return e.value="light",(o,u)=>(l(),r("section",null,[s(o.$slots,"default")]))}});export{m as default};
