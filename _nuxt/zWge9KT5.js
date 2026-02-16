@@ -1,1 +1,0 @@
-import{_ as o,o as a,c,a as e,D as n}from"./B9Zb4p0E.js";const r={},l={class:"max-w-xl m-auto"},_={class:"mt-4"};function d(s,t){return a(),c("section",l,[t[0]||(t[0]=e("h1",{class:"text-3xl text-center mt-2 font-bold"}," OBS Overlay ユーティリティ ",-1)),e("section",_,[n(s.$slots,"default")])])}const m=o(r,[["render",d]]);export{m as default};
