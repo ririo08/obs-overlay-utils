@@ -1,1 +1,0 @@
-import{aq as t,n as a,i as n,a4 as r,W as s}from"./BWr7-p-6.js";const l=()=>t("color-mode").value,m=a({__name:"overlay",setup(c){const e=l();return e.value="light",(o,u)=>(s(),n("section",null,[r(o.$slots,"default")]))}});export{m as default};
