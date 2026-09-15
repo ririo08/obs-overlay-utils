@@ -3,7 +3,7 @@
   "version": "v0.1",
   "dependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxt/eslint": "^0.7.6",
+    "@nuxt/eslint": "^1.0.0",
     "@nuxt/ui": "^2.21.0",
     "@types/gapi.client.youtube-v3": "^0.0.4",
     "@vueuse/core": "^12.5.0",
