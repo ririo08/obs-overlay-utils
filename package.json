@@ -9,7 +9,7 @@
     "@vueuse/core": "^12.5.0",
     "@vueuse/nuxt": "^12.5.0",
     "@vueuse/router": "^12.5.0",
-    "eslint": "^9.19.0",
+    "eslint": "^10.0.0",
     "nuxt": "^3.15.4",
     "sass": "^1.83.4",
     "vue": "^3.5.13",
